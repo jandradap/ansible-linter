@@ -1,1 +1,3 @@
-# ansible-linter
+# ansible-linter [![](https://images.microbadger.com/badges/version/jorgeandrada/ansible-linter.svg)](https://microbadger.com/images/jorgeandrada/ansible-linter "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/jorgeandrada/ansible-linter.svg)](https://microbadger.com/images/jorgeandrada/ansible-linter "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/commit/jorgeandrada/ansible-linter.svg)](https://microbadger.com/images/jorgeandrada/ansible-linter "Get your own commit badge on microbadger.com")
+
+**Info** [https://github.com/willthames/ansible-lint](https://github.com/willthames/ansible-lint)
