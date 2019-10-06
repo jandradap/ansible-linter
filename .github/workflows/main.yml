@@ -20,6 +20,6 @@ jobs:
     - name: Docker login
       run: echo $GITHUB_TOKEN | docker login docker.pkg.github.com --username ${{github.actor}} --password-stdin
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
     - name: Push Docker image to Github package registry
       run: docker push docker.pkg.github.com/${{ github.repository }}/ansible-linter:develop
