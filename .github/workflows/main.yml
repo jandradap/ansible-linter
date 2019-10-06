@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Setting docker tag
-      run: DOCKER_TAG=${GITHUB_REF##*/} && if [ $DOCKER_TAG=="MASTER" ]; then DOCKER_TAG="latest"; fi
+      run: export DOCKER_TAG=${GITHUB_REF##*/} && if [ $DOCKER_TAG=="MASTER" ]; then export DOCKER_TAG="latest"; fi
     - name: show env
       run: env
     - name: Build the Docker image
