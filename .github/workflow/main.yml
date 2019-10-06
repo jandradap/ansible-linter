@@ -10,7 +10,11 @@ jobs:
  
     steps:
     - uses: actions/checkout@v1
+    - name: Setting docker tag
+      run: DOCKER_TAG=${GITHUB_REF##*/} && if [ $DOCKER_TAG=="MASTER" ]; then DOCKER_TAG="latest"; fi
+    - name: show env
+      run: env
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag docker.pkg.github.com/${{ github.repository }}/ansible-linter:${GITHUB_REF##*/}
+      run: docker build . --file Dockerfile --tag docker.pkg.github.com/${{ github.repository }}/ansible-linter:$DOCKER_TAG
     - name: Push Docker image to Github package registry
       run: docker push docker.pkg.github.com/${{ github.repository }}/ansible-linter:${GITHUB_REF##*/}
