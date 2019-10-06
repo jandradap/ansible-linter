@@ -1,6 +1,11 @@
-name: Docker Image CI
+name: Docker Image CI / CD
 
-on: [push]
+
+on:
+  push:
+    branches:
+      - dev*
+
 
 jobs:
 
@@ -10,11 +15,7 @@ jobs:
  
     steps:
     - uses: actions/checkout@v1
-    - name: Setting docker tag
-      run: export DOCKER_TAG=${GITHUB_REF##*/} && if [ $DOCKER_TAG=="MASTER" ]; then export DOCKER_TAG="latest"; fi
-    - name: show env
-      run: env
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag docker.pkg.github.com/${{ github.repository }}/ansible-linter:$DOCKER_TAG
+      run: docker build . --file Dockerfile --tag docker.pkg.github.com/${{ github.repository }}/ansible-linter:develop
     - name: Push Docker image to Github package registry
-      run: docker push docker.pkg.github.com/${{ github.repository }}/ansible-linter:${GITHUB_REF##*/}
+      run: docker push docker.pkg.github.com/${{ github.repository }}/ansible-linter:develop
