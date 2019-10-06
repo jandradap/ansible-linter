@@ -1,20 +1,14 @@
 name: Docker Image CI / CD
-
-
 on:
   push:
     branches:
       - dev*
 
-
 jobs:
-
   build:
- 
     runs-on: ubuntu-latest
- 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@develop
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag docker.pkg.github.com/${{ github.repository }}/ansible-linter:develop
     # - name: Docker login
