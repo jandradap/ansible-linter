@@ -17,9 +17,17 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag docker.pkg.github.com/${{ github.repository }}/ansible-linter:develop
-    - name: Docker login
-      run: echo $GITHUBTOKEN | docker login docker.pkg.github.com --username ${{github.actor}} --password-stdin
-      env:
-        GITHUBTOKEN: ${{ secrets.GITHUBTOKEN }}
-    - name: Push Docker image to Github package registry
-      run: docker push docker.pkg.github.com/${{ github.repository }}/ansible-linter:develop
+    # - name: Docker login
+    #   run: echo $GITHUBTOKEN | docker login docker.pkg.github.com --username ${{github.actor}} --password-stdin
+    #   env:
+    #     GITHUBTOKEN: ${{ secrets.GITHUBTOKEN }}
+    # - name: Push Docker image to Github package registry
+    #   run: docker push docker.pkg.github.com/${{ github.repository }}/ansible-linter:develop
+
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: ${{ github.repository }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        registry: docker.pkg.github.com
