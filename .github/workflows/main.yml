@@ -18,6 +18,8 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag docker.pkg.github.com/${{ github.repository }}/ansible-linter:develop
     - name: Docker login
-      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com --username ${{github.actor}} --password-stdin
+      run: echo $GITHUB_TOKEN | docker login docker.pkg.github.com --username ${{github.actor}} --password-stdin
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Push Docker image to Github package registry
       run: docker push docker.pkg.github.com/${{ github.repository }}/ansible-linter:develop
